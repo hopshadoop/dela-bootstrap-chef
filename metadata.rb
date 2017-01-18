@@ -32,6 +32,14 @@ attribute "java/jdk_version",
           :description => "Version of Java to use (e.g., '7' or '8')",
           :type => "string"
 
+attribute "delabootstrap/ip",
+         :description => "delabootstrap server ip.",
+         :type => "string"
+
+attribute "delabootstrap/port",
+         :description => "delabootstrap server port.",
+         :type => "string"
+
 attribute "delabootstrap/id",
           :description => "id for the delabootstrap instance. Randomly generated, but can be ovverriden here.",
           :type => "string"
@@ -44,6 +52,3 @@ attribute "delabootstrap/log_level",
           :description => "Default: WARN. Can be INFO or DEBUG or TRACE or ERROR.",
           :type => "string"
 
-attribute "delabootstrap/port",
-	    :description => "internal delabootstrap server port.",
-	    :type => "string"
