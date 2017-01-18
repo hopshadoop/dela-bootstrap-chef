@@ -1,0 +1,16 @@
+[Unit]
+Description = delabootstrap server
+After = syslog.target network.target remote-fs.target
+
+[Service]
+User = <%= node.delabootstrap.user %>
+
+PIDFile = /tmp/delabootstrap.pid
+ExecStart = <%= node.delabootstrap.home %>/bin/start.sh
+ExecStop = <%= node.delabootstrap.home %>/bin/stop.sh
+LimitNOFILE = 20000
+
+Type = forking
+
+[Install]
+WantedBy = multi-user.target

@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+
+USERID=`id | sed -e 's/).*//; s/^.*(//;'`
+if [ "X$USERID" != "Xroot" ]; then
+   echo "You should have run update_binaries as root"
+   exit -3
+fi
+
+BINARIES_SERVER=snurran.sics.se
+DELABOOTSTRAP_USER=<%= node.delabootstrap.user %>
+DELABOOTSTRAP_HOME=<%= node.delabootstrap.home %>
+WGET="wget <%= node.delabootstrap.url %> -O delabootstrap.jar"
+
+service delabootstrap stop
+
+echo "cd ${DELABOOTSTRAP_HOME}/lib"
+cd ${DELABOOTSTRAP_HOME}/lib
+
+echo "cleaning..."
+rm -rf bin
+rm -rf delabootstrap.jar
+
+echo "su ${DELABOOTSTRAP_USER} -c "$WGET""
+su ${DELABOOTSTRAP_USER} -c "$WGET"
+
+service delabootstrap start
