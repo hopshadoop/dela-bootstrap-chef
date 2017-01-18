@@ -6,7 +6,8 @@ description      'Installs/Configures/Runs delabootstrap server'
 version          "0.1.0"
 
 recipe            "delabootstrap::install", "Install delabootstrap binaries"
-recipe            "delabootstrap::server", "Starts the delabootstrap server"
+recipe            "delabootstrap::default", "Starts the delabootstrap server simple mode"
+recipe            "delabootstrap::server", "Starts the delabootstrap server as master"
 recipe            "delabootstrap::purge",  "Stops the delabootstrap server and deletes all its files"
 
 %w{ ubuntu debian rhel centos }.each do |os|

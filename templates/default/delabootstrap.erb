@@ -21,12 +21,12 @@ EXEC_WITH_USER="su <%= node.delabootstrap.user %> -c"
 
 start() {
   ulimit -n 65000 2>&1 > /dev/null
-  $EXEC_WITH_USER "$START_PROG"
+  $EXEC_WITH_USER "$START_PROG" >/dev/null 2>&1 < /dev/null
   return $?
 }
 
 stop() {
-  $EXEC_WITH_USER "$STOP_PROG"
+  $EXEC_WITH_USER "$STOP_PROG" > /dev/null 2>&1 < /dev/null
   return $?
 }
 

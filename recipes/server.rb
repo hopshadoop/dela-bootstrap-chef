@@ -1,6 +1,4 @@
-include_recipe "delabootstrap::_default"
-
-homedir = "/home/#{node.delabootstrap.user}"
+include_recipe "delabootstrap::default"
 
 homedir = "/home/#{node.delabootstrap.user}"
 Chef::Log.info "Home dir is #{homedir}. Generating ssh keys..."
@@ -18,3 +16,5 @@ kagent_keys "#{homedir}" do
   cb_recipe "server"  
   action :get_publickey
 end  
+
+Chef::Log.info "delabootstrap::server completed"

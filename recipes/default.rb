@@ -70,22 +70,29 @@ else #sysv
     action :nothing
   end
 
+  Chef::Log.info "delabootstrap::default step1"
+
   template "/etc/init.d/#{service_name}" do
     source "#{service_name}.erb"
     owner "root"
     group "root"
     mode 0754
-    notifies :enable, resources(:service => service_name)
-    notifies :restart, resources(:service => service_name), :immediately
+    notifies :enable, resources(:service => service_name), :immediately
+    notifies :start, resources(:service => service_name), :immediately
   end
 
+  Chef::Log.info "delabootstrap::default step2"
+
 end
 
+Chef::Log.info "delabootstrap::default step3"
 
-if node.kagent.enabled == "true" 
-   kagent_config service_name do
-     service service_name
-     log_file "#{node.delabootstrap.home}/delabootstrap.log"
-     config_file "#{node.delabootstrap.home}/conf/application.conf"
-   end
-end
+#if node.kagent.enabled == "true" 
+#   kagent_config service_name do
+#     service service_name
+#     log_file "#{node.delabootstrap.home}/delabootstrap.log"
+#     config_file "#{node.delabootstrap.home}/conf/application.conf"
+#   end
+#end
+
+Chef::Log.info "delabootstrap::default completed"
