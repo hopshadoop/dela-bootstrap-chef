@@ -6,7 +6,8 @@ description      'Installs/Configures/Runs delabootstrap server'
 version          "0.1.0"
 
 recipe            "delabootstrap::install", "Install delabootstrap binaries"
-recipe            "delabootstrap::server", "Starts the delabootstrap server"
+recipe            "delabootstrap::default", "Starts the delabootstrap server simple mode"
+recipe            "delabootstrap::server", "Starts the delabootstrap server with master"
 recipe            "delabootstrap::purge",  "Stops the delabootstrap server and deletes all its files"
 
 %w{ ubuntu debian rhel centos }.each do |os|
@@ -36,6 +37,11 @@ attribute "delabootstrap/id",
           :description => "id for the delabootstrap instance. Randomly generated, but can be ovverriden here.",
           :type => "string"
 
+
+attribute "delabootstrap/port",
+         :description => "internal delabootstrap server port.",
+         :type => "string"
+         
 attribute "delabootstrap/seed",
           :description => "seed for the dela instance. Randomly generated, but can be ovverriden here.",
           :type => "string"
@@ -44,6 +50,6 @@ attribute "delabootstrap/log_level",
           :description => "Default: WARN. Can be INFO or DEBUG or TRACE or ERROR.",
           :type => "string"
 
-attribute "delabootstrap/port",
-	    :description => "internal delabootstrap server port.",
-	    :type => "string"
+attribute "kagent/enabled",
+          :description => "'true' by default",
+          :type => "string"

@@ -10,10 +10,7 @@ JAR="${BASE_DIR}/lib/delabootstrap.jar"
 cd $BASE_DIR
 rm -f <%= node.delabootstrap.pid_file %> <%= node.delabootstrap.logs %>
 # dozy.log*
-echo "nohup java $IPV4 $CONF $LOG4J -jar $JAR 2>&1 > <%= node.delabootstrap.logs %> &"
-nohup java $IPV4 $CONF $LOG4J -jar $JAR 2>&1 > <%= node.delabootstrap.logs %> &
+echo "nohup java $IPV4 $CONF $LOG4J -jar $JAR > <%= node.delabootstrap.logs %> 2>&1 < /dev/null &"
+nohup java $IPV4 $CONF $LOG4J -jar $JAR > <%= node.delabootstrap.logs %> 2>&1 < /dev/null &
 echo $! > <%= node.delabootstrap.pid_file %>
-sleep 3
-echo "<%= node.delabootstrap.logs %>"
-kill -0 `cat <%= node.delabootstrap.pid_file %>`
 exit $?

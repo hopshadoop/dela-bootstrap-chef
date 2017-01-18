@@ -3,12 +3,12 @@ set -e
 PID_FILE=<%= node.delabootstrap.pid_file %>
 
 function kill_named {
-    PID=`ps aux | grep -i delabootstrap | awk 'NR==1{print $2}'`
+    PID=`ps aux | grep -i delabootstrap | grep -v grep | grep -v stop | awk 'NR==1{print $2}'`
     if [ "$PID" != "" ] ; then
-	kill -9 $PID > /dev/null 2>&1
-        res=$?
+	   kill -9 $PID > /dev/null 2>&1 
+       res=$?
     else
-	res=$NOT_FOUND
+	   res=0
     fi
     return $res
 }
@@ -17,8 +17,11 @@ res=1
 
 if [ -f $PID_FILE ] ; then
  PID=`cat $PID_FILE`
- kill $PID > /dev/null 2>&1
- res=$?
+ if ps -p $PID > /dev/null
+ then
+   kill $PID > /dev/null 2>&1
+   res=$?
+  fi
 fi
 
 if [ $res -ne 0 ] ; then
@@ -28,7 +31,7 @@ fi
 rm -f ${PID_FILE}
 
 if [ $res -eq 0 ] ; then
- echo "Killed delabootstrap"
+    echo "Killed delabootstrap"
 else
     echo "Could not find delabootstrap process to kill"
 fi
