@@ -11,7 +11,7 @@ default.delabootstrap.url                   = "http://snurran.sics.se/hops/dela/
 default.delabootstrap.dir                   = "/srv"
 default.delabootstrap.base_dir              = node.delabootstrap.dir + "/delabootstrap"
 default.delabootstrap.home                  = node.delabootstrap.base_dir + "-" + node.delabootstrap.version
-default.delabootstrap.scripts               = %w{ start.sh stop.sh update_binaries.sh}
+default.delabootstrap.scripts               = %w{ start.sh stop.sh generic_stop.sh update_binaries.sh}
 default.delabootstrap.logs                  = node.delabootstrap.base_dir + "/delabootstrap.log"
 default.delabootstrap.pid_file              = "/tmp/delabootstrap.pid"
 
