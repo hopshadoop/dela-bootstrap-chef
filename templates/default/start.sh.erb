@@ -1,16 +1,12 @@
 #!/bin/bash
 set -e
-BASE_DIR=<%= node.delabootstrap.base_dir %>
-echo "base dir: $BASE_DIR"
-CONF="-Dconfig.file=${BASE_DIR}/conf/application.conf"
-LOG4J="-Dlog4j.configuration=file://${BASE_DIR}/conf/log4j.properties"
-IPV4="-Djava.net.preferIPv4Stack=true"
-JAR="${BASE_DIR}/lib/delabootstrap.jar"
 
-cd $BASE_DIR
-rm -f <%= node.delabootstrap.pid_file %> <%= node.delabootstrap.logs %>
-# dozy.log*
-echo "nohup java $IPV4 $CONF $LOG4J -jar $JAR > <%= node.delabootstrap.logs %> 2>&1 < /dev/null &"
-nohup java $IPV4 $CONF $LOG4J -jar $JAR > <%= node.delabootstrap.logs %> 2>&1 < /dev/null &
-echo $! > <%= node.delabootstrap.pid_file %>
-exit $?
+SERVICE_NAME=delabootstrap
+BASE_DIR=<%= node.delabootstrap.base_dir %>
+PID_FILE=<%= node.delabootstrap.pid_file %>
+LOGS=<%= node.delabootstrap.logs %>
+CMD=${BASE_DIR}/bin/generic_start.sh  
+
+rm -f <%= node.delabootstrap.pid_file %>
+rm -f ${LOGS}
+$CMD $SERVICE_NAME $BASE_DIR $PID_FILE $LOGS
