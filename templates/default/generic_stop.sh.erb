@@ -7,23 +7,28 @@ PID_FILE=$2
 #touch $LOG
 
 function kill_named {
-  PID=`ps aux | grep -i $SERVICE_NAME | grep -v grep | grep -v stop | awk 'NR==1{print $2}'`
+  #echo "kill named" >> $LOG
+  #echo `ps aux | grep -i ${SERVICE_NAME}.jar | grep -i java | grep -v grep | grep -v karamel | grep -v chef` >> $LOG
+  PID=`ps aux | grep -i ${SERVICE_NAME}.jar | grep -i java | grep -v grep | grep -v karamel | grep -v chef | awk 'NR==1{print $2}'`
   #echo $PID >> $LOG
   if [ "$PID" != "" ] ; then
     kill -9 $PID > /dev/null 2>&1 
     res=$?
   else
-    res=0
+    res=1
   fi
-  return $res
+  return 0
 }
 
 res=1
 
+#echo "stopping" >> $LOG
 if [ -f $PID_FILE ] ; then
   PID=`cat $PID_FILE`
+  #echo "PID $PID from file" >> $LOG
   if ps -p $PID > /dev/null 
   then
+    #echo "PID not process"
     kill $PID > /dev/null 2>&1
     res=$?
   fi

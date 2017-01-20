@@ -8,5 +8,4 @@ LOGS=<%= node.delabootstrap.logs %>
 CMD=${BASE_DIR}/bin/generic_start.sh  
 
 rm -f <%= node.delabootstrap.pid_file %>
-rm -f ${LOGS}
 $CMD $SERVICE_NAME $BASE_DIR $PID_FILE $LOGS

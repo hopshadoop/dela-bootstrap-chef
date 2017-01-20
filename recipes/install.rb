@@ -82,3 +82,34 @@ link node.delabootstrap.base_dir do
   to node.delabootstrap.home
 end
 
+if node.delabootstrap.id.nil?
+    node.override.delabootstrap.id = Time.now.getutc.to_i
+end
+
+if node.delabootstrap.seed.nil?
+    node.override.delabootstrap.seed = Random.rand(100000)
+end
+
+# hack until groups attrs work in karamel
+node.override.delabootstrap.port = 30000
+node.override.delabootstrap.id = 1
+####
+
+template "#{node.delabootstrap.home}/conf/application.conf" do
+  source "application.conf.erb" 
+  owner node.delabootstrap.user
+  group node.delabootstrap.group
+  mode 0750
+  variables({
+  })
+end
+
+template "#{node.delabootstrap.home}/conf/log4j.properties" do
+  source "log4j.properties.erb" 
+  owner node.delabootstrap.user
+  group node.delabootstrap.group
+  mode 0750
+  variables({
+  })
+end
+

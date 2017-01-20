@@ -1,6 +1,6 @@
-
-default.delabootstrap.group                 = "dela"
-default.delabootstrap.user                  = "dela"
+default.delabootstrap.service				        = "delabootstrap"
+default.delabootstrap.group                 = node.install.user.empty? ? "dela" : node.install.user
+default.delabootstrap.user                  = node.install.user.empty? ? "dela" : node.install.user
 
 default.delabootstrap.public_ips            = ['10.0.2.15']
 default.delabootstrap.private_ips           = ['10.0.2.15']
@@ -8,7 +8,7 @@ default.delabootstrap.systemd               = "true"
 
 default.delabootstrap.version               = "0.0.1-SNAPSHOT"
 default.delabootstrap.url                   = "http://snurran.sics.se/hops/dela/delabootstrap-#{node.delabootstrap.version}.jar"
-default.delabootstrap.dir                   = "/srv"
+default.delabootstrap.dir                   = node.install.dir.empty? ? "/usr/local" : node.install.dir
 default.delabootstrap.base_dir              = node.delabootstrap.dir + "/delabootstrap"
 default.delabootstrap.home                  = node.delabootstrap.base_dir + "-" + node.delabootstrap.version
 default.delabootstrap.scripts               = %w{ start.sh generic_start.sh stop.sh generic_stop.sh update_binaries.sh}

@@ -1,2 +1,4 @@
-dependencies:
-  - recipe: delabootstrap::server
+dependencies: 
+  - recipe: delabootstrap::install
+  - recipe: delabootstrap::default
+  - recipe: delabootstrap::pkey-provider
