@@ -4,3 +4,5 @@ dependencies:
     local:
       - kagent::default
   - recipe: delabootstrap::pkey-provider
+    local:
+      - kagent::default
