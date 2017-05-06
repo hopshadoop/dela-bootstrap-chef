@@ -1,4 +1,6 @@
 dependencies: 
   - recipe: delabootstrap::install
   - recipe: delabootstrap::default
+    local:
+      - kagent::default
   - recipe: delabootstrap::pkey-provider
